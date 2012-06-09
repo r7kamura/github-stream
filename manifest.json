@@ -1,0 +1,9 @@
+{
+  "name": "GitHub Stream",
+  "version": "1.0",
+  "description": "Stream notifications on GitHub",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "popup": "popup.html"
+  }
+}
