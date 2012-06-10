@@ -11,10 +11,12 @@
   bindClick: function() {
     var self = this;
     $('#next-button').click(function() {
+      var button = this;
       self.getOldestNotification(function(notification) {
-        if (!notification) return;
-        self.moveToUrl(notification);
+        if (notification) self.moveToUrl(notification);
+        $(button).toggleClass('disable', !notification);
       });
+      return false;
     });
   },
 
