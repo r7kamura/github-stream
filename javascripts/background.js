@@ -41,7 +41,9 @@
     var self = this;
     $.get(this.notificationUrl() + '?page=' + page, function(data) {
       $(data).find('#inbox .item.unread').each(function() {
-        self.notifications.push($(this).find('.subject').attr('href'))
+        self.notifications.push(
+          self.host() + $(this).find('.subject').attr('href')
+        );
       });
 
       self.updateUnreadCount();
@@ -50,7 +52,11 @@
   },
 
   notificationUrl: function() {
-    return (localStorage['host'] || this.baseUrl) + '/inbox/notifications';
+    return this.host() + '/inbox/notifications';
+  },
+
+  host: function() {
+    return localStorage['host'] || this.baseUrl;
   },
 
   bindRequestToPopNotification: function() {
