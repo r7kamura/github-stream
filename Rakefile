@@ -2,43 +2,40 @@ require "pathname"
 require "rubygems"
 require "crxmake"
 
-module CrxPackager
-  extend self
-
-  def crx
-    build
+class CrxPackager
+  def self.build(type)
+    new(type).build
   end
 
-  def zip
-    build(:zip)
+  def initialize(type)
+    name  = Pathname.new(".").realpath.basename
+    @pem  = Pathname.new("#{name}.pem")
+    @pkg  = Pathname.new("pkg")
+    @out  = Pathname.new("pkg/#{name}.#{type}")
+    @src  = Pathname.new("src")
+    @type = type
+  end
+
+  def build
+    remove_package
+    create_package
   end
 
   private
 
-  def build(type = :crx)
-    name = Pathname.new(".").realpath.basename
-    @pem = Pathname.new("#{name}.pem")
-    @pkg = Pathname.new("pkg")
-    @out = Pathname.new("pkg/#{name}.#{type}")
-    @src = Pathname.new("src")
-
-    remove_package
-    create_package(type)
-  end
-
   def remove_package
-    @pkg.rmtree if @pkg.exist?
+    @out.rmtree if @out.exist?
   end
 
-  def create_package(type)
-    @pkg.mkdir
+  def create_package
+    @pkg.mkdir unless @pkg.exist?
     CrxMake.send(
-      type == :crx ? :make : :zip,
-      :ignoredir        => /^\.git$/,
-      :verbose          => true,
-      :ex_dir           => @src,
-      :pkey             => @pem,
-      :"#{type}_output" => @out
+      @type.to_sym == :crx ? :make : :zip,
+      :ignoredir         => /^\.git$/,
+      :verbose           => true,
+      :ex_dir            => @src,
+      :pkey              => @pem,
+      :"#{@type}_output" => @out
     )
   end
 end
@@ -46,7 +43,7 @@ end
 %w[crx zip].each do |name|
   desc "Create #{name}"
   task name do
-    CrxPackager.send(name)
+    CrxPackager.build(name)
   end
 end
 
