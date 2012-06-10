@@ -3,6 +3,7 @@
   "version": "1.0",
   "description": "Stream notifications on GitHub",
   "permissions": [
+    "tabs",
     "https://github.cookpad.com/"
   ],
   "browser_action": {
