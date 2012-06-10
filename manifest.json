@@ -2,8 +2,17 @@
   "name": "GitHub Stream",
   "version": "1.0",
   "description": "Stream notifications on GitHub",
+  "permissions": [
+    "https://github.cookpad.com/"
+  ],
   "browser_action": {
     "default_icon": "images/icon.png",
     "popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "javascripts/jquery-1.7.2.min.js",
+      "javascripts/background.js"
+    ]
   }
 }
