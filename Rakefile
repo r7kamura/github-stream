@@ -1,7 +1,6 @@
 require "pathname"
 require "rubygems"
 require "crxmake"
-require "json"
 
 module CrxPackager
   extend self
