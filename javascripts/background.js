@@ -1,6 +1,5 @@
 ({
-  baseUrl: 'https://github.cookpad.com/',
-  notificationUrl: 'https://github.cookpad.com/inbox/notifications',
+  baseUrl: 'https://github.com',
   badgeColor: [255, 160, 80, 255],
   interval: 1000 * 60 * 10,
   pageLimit: 10,
@@ -8,33 +7,27 @@
 
   init: function() {
     this.setBadgeColor(this.badgeColor);
-
-    var self = this;
-    setInterval(function() {
-      self.updateUnreadCount()
-      self.updateNotifications();
-    }, this.interval);
-    this.updateUnreadCount();
-    this.updateUnreadNotifications();
-
-    this.bindRequest();
+    this.startPolling();
+    this.bindRequestToPopNotification();
+    this.bindRequestToResetNotifications();
   },
 
   /* private */
 
-  updateUnreadCount: function() {
+  startPolling: function() {
     var self = this;
-    this.getUnreadCount(function(unreadCount) {
-      if (unreadCount > 0)
-        self.setBadgeText(unreadCount);
-    });
+    setInterval(function() {
+      self.updateUnreadNotifications();
+    }, this.interval);
+    this.updateUnreadNotifications();
   },
 
-  getUnreadCount: function(callback) {
-    $.get(this.baseUrl, function(data) {
-      var unreadCount = $(data).find('#user-links .unread_count').text();
-      callback(unreadCount);
-    });
+  updateUnreadCount: function() {
+    if (this.notifications.length > 0) {
+      this.setBadgeText(this.notifications.length);
+    } else {
+      this.setBadgeText('');
+    }
   },
 
   updateUnreadNotifications: function() {
@@ -46,20 +39,34 @@
     if (page > this.pageLimit) return;
 
     var self = this;
-    $.get(this.notificationUrl, function(data) {
+    $.get(this.notificationUrl() + '?page=' + page, function(data) {
       $(data).find('#inbox .item.unread').each(function() {
-        var url = $(this).find('.subject').attr('href');
-        self.notifications.push(url);
+        self.notifications.push($(this).find('.subject').attr('href'))
       });
 
+      self.updateUnreadCount();
       self.crawlNotifications(page + 1);
     });
   },
 
-  bindRequest: function() {
+  notificationUrl: function() {
+    return (localStorage['host'] || this.baseUrl) + '/inbox/notifications';
+  },
+
+  bindRequestToPopNotification: function() {
     var self = this;
     chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+      if (request.method != 'popNotification') return;
       sendResponse(self.notifications.pop());
+      self.updateUnreadCount();
+    });
+  },
+
+  bindRequestToResetNotifications: function() {
+    var self = this;
+    chrome.extension.onRequest.addListener(function(request) {
+      if (request.method != 'resetNotifications') return;
+      self.updateUnreadNotifications();
     });
   },
 

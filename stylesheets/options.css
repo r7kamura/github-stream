@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 800px;
+  margin: 0 auto;
+}
+
+form {
+  padding: 20px;
+  margin: 40px 0;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #aaa;
+  font-size: 120%;
+  background: #fafafa;
+}
+
+label span {
+  font-size: 80%;
+  color: #999;
+}
+
+input {
+  width: 100%;
+  border: solid 1px #ccc;
+  padding: 4px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  font-size: 100%;
+}

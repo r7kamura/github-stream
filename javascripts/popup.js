@@ -19,13 +19,12 @@
   },
 
   getOldestNotification: function(callback) {
-    chrome.extension.sendRequest({}, function(res) {
+    chrome.extension.sendRequest({method: 'popNotification'}, function(res) {
       callback(res);
     });
   },
 
   moveToUrl: function(url) {
-    console.log(url);
     chrome.tabs.getSelected(null, function(tab) {
       chrome.tabs.update(tab.id, {url: url});
     });

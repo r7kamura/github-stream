@@ -4,7 +4,7 @@
   "description": "Stream notifications on GitHub",
   "permissions": [
     "tabs",
-    "https://github.cookpad.com/"
+    "https://*/"
   ],
   "browser_action": {
     "default_icon": "images/icon.png",
@@ -15,5 +15,6 @@
       "javascripts/jquery-1.7.2.min.js",
       "javascripts/background.js"
     ]
-  }
+  },
+  "options_page": "options.html"
 }
