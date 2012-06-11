@@ -22,5 +22,5 @@
     ]
   },
   "options_page": "options.html",
-  "update_url": "https://github.com/r7kamura/github-stream/raw/master/pkg/updates.xml"
+  "update_url": "https://github.com/r7kamura/github-stream/raw/master/pkg/github-stream.xml"
 }

@@ -3,6 +3,7 @@ GEM
   specs:
     crxmake (2.0.7)
       zip (~> 2.0.2)
+    json (1.6.6)
     zip (2.0.2)
 
 PLATFORMS
@@ -10,3 +11,4 @@ PLATFORMS
 
 DEPENDENCIES
   crxmake (~> 2.0.7)
+  json
