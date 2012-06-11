@@ -40,7 +40,7 @@
 
     var self = this;
     $.get(this.notificationUrl() + '?page=' + page, function(data) {
-      $(data).find('#inbox .item').each(function() {
+      $(data).find('#inbox .item.unread').each(function() {
         var $this = $(this);
 
         var title   = $this.find('.title').text();

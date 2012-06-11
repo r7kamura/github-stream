@@ -15,6 +15,6 @@ Google Chrome >= 18
 * set your github-enterprise's hostname if you want it
 
 ## Captures
-![Button](http://dl.dropbox.com/u/5978869/image/20120611_015637.png)
+![Button](http://dl.dropbox.com/u/5978869/image/20120611_195314.png)
 
 ![Option](http://dl.dropbox.com/u/5978869/image/20120611_151016.png)
