@@ -4,6 +4,9 @@ Stream notifications on GitHub
 ## Install
 https://github.com/r7kamura/github-stream/raw/master/pkg/github-stream.crx
 
+## Require
+Google Chrome >= 18
+
 ## Features
 
 * display unread notifications count on the badge
