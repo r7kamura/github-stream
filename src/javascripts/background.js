@@ -40,12 +40,21 @@
 
     var self = this;
     $.get(this.notificationUrl() + '?page=' + page, function(data) {
-      $(data).find('#inbox .item.unread').each(function() {
-        var path = $(this).find('.subject').attr('href');
-        if (!path.match(/^http/)) {
-          path = self.host() + path;
-        }
-        self.notifications.push(path);
+      $(data).find('#inbox .item').each(function() {
+        var $this = $(this);
+
+        var title   = $this.find('.title').text();
+        var subject = $this.find('.message p:nth-child(1)').text();
+        var body    = $this.find('.message p:nth-child(2)').text();
+        var path    = $this.find('.subject').attr('href');
+        if (!path.match(/^http/)) path = self.host() + path;
+
+        self.notifications.push({
+          title: title,
+          subject: subject,
+          body: body,
+          url: path
+        });
       });
 
       self.updateUnreadCount();
