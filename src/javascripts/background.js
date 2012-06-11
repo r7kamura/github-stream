@@ -41,9 +41,11 @@
     var self = this;
     $.get(this.notificationUrl() + '?page=' + page, function(data) {
       $(data).find('#inbox .item.unread').each(function() {
-        self.notifications.push(
-          self.host() + $(this).find('.subject').attr('href')
-        );
+        var path = $(this).find('.subject').attr('href');
+        if (!path.match(/^http/)) {
+          path = self.host() + path;
+        }
+        self.notifications.push(path);
       });
 
       self.updateUnreadCount();
