@@ -13,7 +13,10 @@
     $('#next-button').click(function() {
       var button = this;
       self.getOldestNotification(function(notification) {
-        if (notification) self.moveToUrl(notification);
+        if (notification) {
+          self.moveToUrl(notification.url);
+          self.setDescriptions(notification);
+        }
         $(button).toggleClass('disable', !notification);
       });
       return false;
@@ -29,6 +32,12 @@
   moveToUrl: function(url) {
     chrome.tabs.getSelected(null, function(tab) {
       chrome.tabs.update(tab.id, {url: url});
+    });
+  },
+
+  setDescriptions: function(notification) {
+    $.each(['title', 'subject', 'body'], function() {
+      $('#' + this + ' .value').text(notification[this]);
     });
   }
 }).init();

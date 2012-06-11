@@ -1,5 +1,47 @@
-body {
+* {
   margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 700px;
+  font-size: 13px;
+  line-height: 1.9;
+  text-shadow: 0 1px 0 white;
+}
+
+table {
+  width: 100%;
+}
+
+.main {
+  position: relative;
+  padding: 5px;
+  border-radius: 5px;
+  background: #fafafa;
+}
+
+#next-button {
+  display: block;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+  font-size: 13px;
+}
+
+.name {
+  width: 30px;
+}
+
+.delimiter {
+  padding: 0 5px;
+  color: #aaa;
+  text-align: center;
+}
+
+.value {
+  width: 100%;
 }
 
 .button {
