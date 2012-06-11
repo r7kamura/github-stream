@@ -5,7 +5,7 @@ require "json"
 
 class CrxPackager
   NAME      = Pathname.new(".").realpath.basename
-  USER      = "r7kamura"
+  USER      = `git config github.user`.strip
   CODE_BASE = "https://github.com/#{USER}/#{NAME}/raw/master/pkg/#{NAME}.crx"
   APP_ID    = "joomeamaboggngeopjkflnocdghkglak"
 
