@@ -17,4 +17,4 @@ Google Chrome >= 18
 ## Captures
 ![Button](http://dl.dropbox.com/u/5978869/image/20120611_015637.png)
 
-![Option](http://dl.dropbox.com/u/5978869/image/20120611_015157.png)
+![Option](http://dl.dropbox.com/u/5978869/image/20120611_151016.png)
