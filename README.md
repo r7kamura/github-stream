@@ -2,7 +2,8 @@
 Stream notifications on GitHub
 
 ## Install
-https://github.com/r7kamura/github-stream/raw/master/pkg/github-stream.crx
+Download [github-stream.crx](https://github.com/r7kamura/github-stream/raw/master/pkg/github-stream.crx) and Drag-and-Drop it to chrome extension page(chrome://extensions).
+
 
 ## Require
 Google Chrome >= 18
@@ -15,6 +16,6 @@ Google Chrome >= 18
 * set your github-enterprise's hostname if you want it
 
 ## Captures
-![Button](http://dl.dropbox.com/u/5978869/image/20120611_195314.png)
+![](http://dl.dropbox.com/u/5978869/image/20120920_114302.png)
 
-![Option](http://dl.dropbox.com/u/5978869/image/20120611_151016.png)
+![](http://dl.dropbox.com/u/5978869/image/20120920_114328.png)

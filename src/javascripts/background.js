@@ -2,7 +2,6 @@
   baseUrl: 'https://github.com',
   badgeColor: [255, 160, 80, 255],
   interval: 1000 * 60 * 10,
-  pageLimit: 10,
   notifications: [],
 
   init: function() {
@@ -32,38 +31,32 @@
 
   updateUnreadNotifications: function() {
     this.notifications = [];
-    this.crawlNotifications(1);
+    this.crawlNotifications();
   },
 
-  crawlNotifications: function(page) {
-    if (page > this.pageLimit) return;
-
+  crawlNotifications: function() {
     var self = this;
-    $.get(this.notificationUrl() + '?page=' + page, function(data) {
-      $(data).find('#inbox .item.unread').each(function() {
+    $.get(this.notificationUrl(), function(data) {
+      $(data).find('#notification-center .notifications .unread').each(function() {
         var $this = $(this);
 
-        var title   = $this.find('.title').text();
-        var subject = $this.find('.message p:nth-child(1)').text();
-        var body    = $this.find('.message p:nth-child(2)').text();
-        var path    = $this.find('.subject').attr('href');
-        if (!path.match(/^http/)) path = self.host() + path;
+        var title = $this.find('.js-notification-target').text();
+        var url   = $this.find('.js-notification-target').attr('href');
+        var icon  = $this.find('.from-avatar:last-child').attr('src');
 
         self.notifications.push({
           title: title,
-          subject: subject,
-          body: body,
-          url: path
+          url: url,
+          icon: icon
         });
       });
 
       self.updateUnreadCount();
-      self.crawlNotifications(page + 1);
     });
   },
 
   notificationUrl: function() {
-    return this.host() + '/inbox/notifications';
+    return this.host() + '/notifications';
   },
 
   host: function() {

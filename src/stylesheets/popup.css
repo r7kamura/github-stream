@@ -4,21 +4,35 @@
 }
 
 body {
-  width: 700px;
+  width: 500px;
   font-size: 13px;
   line-height: 1.9;
   text-shadow: 0 1px 0 white;
 }
 
-table {
-  width: 100%;
-}
-
 .main {
   position: relative;
-  padding: 5px;
+  padding: 10px 10px 6px;
   border-radius: 5px;
   background: #fafafa;
+}
+
+.message {
+}
+
+#icon {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  vertical-align: middle;
+  border-radius: 3px;
+}
+
+#title {
+  margin-left: 5px;
+  line-height: 20px;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 #next-button {
@@ -30,25 +44,11 @@ table {
   font-size: 13px;
 }
 
-.name {
-  width: 30px;
-}
-
-.delimiter {
-  padding: 0 5px;
-  color: #aaa;
-  text-align: center;
-}
-
-.value {
-  width: 100%;
-}
-
 .button {
   position: relative;
   overflow: visible;
   display: inline-block;
-  padding: 0.5em 1em;
+  padding: 5px 10px;
   border: 1px solid #d4d4d4;
   margin: 0;
   text-decoration: none;

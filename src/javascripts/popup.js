@@ -36,8 +36,7 @@
   },
 
   setDescriptions: function(notification) {
-    $.each(['title', 'subject', 'body'], function() {
-      $('#' + this + ' .value').text(notification[this]);
-    });
+    $('#title').text(notification.title);
+    $('#icon').attr('src', notification.icon);
   }
 }).init();
