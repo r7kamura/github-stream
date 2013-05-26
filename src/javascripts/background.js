@@ -22,11 +22,8 @@
   },
 
   updateUnreadCount: function() {
-    if (this.notifications.length > 0) {
-      this.setBadgeText(this.notifications.length);
-    } else {
-      this.setBadgeText('');
-    }
+    var badgeText = this.notifications.length > 0 ? this.notifications.length : '';
+    this.setBadgeText(badgeText);
   },
 
   updateUnreadNotifications: function() {
@@ -66,7 +63,7 @@
   bindRequestToPopNotification: function() {
     var self = this;
     chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-      if (request.method != 'popNotification') return;
+      if (request.method !== 'popNotification') return;
       sendResponse(self.notifications.pop());
       self.updateUnreadCount();
     });
@@ -75,7 +72,7 @@
   bindRequestToResetNotifications: function() {
     var self = this;
     chrome.extension.onRequest.addListener(function(request) {
-      if (request.method != 'resetNotifications') return;
+      if (request.method !== 'resetNotifications') return;
       self.updateUnreadNotifications();
     });
   },
