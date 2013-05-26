@@ -17,7 +17,7 @@
   bindForm: function() {
     var self = this;
     $('form').submit(function() {
-      self.saveUrl($('#url').val())
+      self.saveUrl($('#url').val());
       self.resetNotifications();
       close();
     });
