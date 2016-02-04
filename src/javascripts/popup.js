@@ -10,12 +10,12 @@
 
   bindClick: function() {
     var self = this;
-    $('#next-button').click(function() {
+    $('#next-button').click(function(event) {
       var button = this;
       self.getOldestNotification(function(notification) {
         if (notification) {
           self.setDescriptions(notification);
-          self.moveToUrl(notification.url);
+          self.moveToUrl(notification.url, event.metaKey);
         } else {
           self.setNoUnreadDescriptions();
         }
@@ -31,9 +31,13 @@
     });
   },
 
-  moveToUrl: function(url) {
+  moveToUrl: function(url, newTab) {
     chrome.tabs.getSelected(null, function(tab) {
-      chrome.tabs.update(tab.id, {url: url});
+      if (newTab) {
+        chrome.tabs.create({url: url, index: tab.index + 1});
+      } else {
+        chrome.tabs.update(tab.id, {url: url});
+      }
     });
   },
 
